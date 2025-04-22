@@ -36,7 +36,6 @@ app.use(json());
 app.use(cookieParser());
 app.use('/',express.static(join(__dirname, 'public')));
 
-/* Define routes */ 
 app.use('/auth', authRouter);
 
 app.use('/athlete-crud',athleteCRUDRouter);
