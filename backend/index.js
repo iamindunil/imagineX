@@ -12,6 +12,14 @@ import measurementscRUDRouter from './crud-operations/measurements-crud.js';
 import athleteStatCRUDRouter from './crud-operations/athlete-stat-crud.js';
 import basicPerformanceCRUDRouter from './crud-operations/basic-performance-crud.js';
 
+import dash100Router from './sports/100m.js';
+import dash200Router from './sports/200m.js';
+import dash400Router from './sports/400m.js';
+import hurdlesRouter from './sports/hurdles.js';
+import verticalRouter from './sports/vertical-jump.js';
+import longRouter from './sports/long-jump.js';
+import trippleRouter from './sports/tripple-jump.js';
+
 
 dotenv.config();
 
@@ -30,10 +38,19 @@ app.use('/',express.static(join(__dirname, 'public')));
 
 /* Define routes */ 
 app.use('/auth', authRouter);
+
 app.use('/athlete-crud',athleteCRUDRouter);
 app.use('/coach-crud',coachcRUDRouter);
 app.use('/measurements-crud',measurementscRUDRouter);
 app.use('/athlete-stat-crud',athleteStatCRUDRouter);
 app.use('/basic-performance-crud',basicPerformanceCRUDRouter);
+
+app.use('/100m-crud', dash100Router);
+app.use('/200m-crud',dash200Router);
+app.use('/400m-crud',dash400Router);
+app.use('/hurdles-crud',hurdlesRouter);
+app.use('/vertical-crud',verticalRouter);
+app.use('/long-crud',longRouter);
+app.use('/tripple-crud',trippleRouter);
 
 app.listen(PORT, ()=>console.log(`Server listening on ${PORT}`));
