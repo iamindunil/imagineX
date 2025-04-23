@@ -27,11 +27,9 @@ router.get('/:athlete_id', /*authenticateToken,*/ async (req, res) => {
         const athleteStatsResult = await pool.query('SELECT * FROM AthleteStats WHERE athlete_id = $1', [athlete_id]);
 
         if (athleteStatsResult.rows.length > 0) {
-            // If so, update the BMI
             await pool.query('UPDATE AthleteStats SET bmi = $1 WHERE athlete_id = $2', [bmi, athlete_id]);
             return res.json({ message: 'BMI updated successfully' });
         } else {
-            // If not, insert a new record
             await pool.query('INSERT INTO AthleteStats (athlete_id, bmi) VALUES ($1, $2)', [athlete_id, bmi]);
             return res.json({ message: 'BMI added successfully' });
         }
