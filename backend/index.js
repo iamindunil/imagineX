@@ -20,6 +20,7 @@ import verticalRouter from './sports/vertical-jump.js';
 import longRouter from './sports/long-jump.js';
 import trippleRouter from './sports/tripple-jump.js';
 import bmiRouter from './calculations/bmi.js';
+import ptwRouter from './calculations/ptw.js';
 
 dotenv.config();
 
@@ -51,6 +52,8 @@ app.use('/hurdles-crud',hurdlesRouter);
 app.use('/vertical-crud',verticalRouter);
 app.use('/long-crud',longRouter);
 app.use('/tripple-crud',trippleRouter);
+
 app.use('/bmi', bmiRouter);
+app.use('/ptw', ptwRouter);
 
 app.listen(PORT, ()=>console.log(`Server listening on ${PORT}`));
