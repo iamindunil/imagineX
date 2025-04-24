@@ -28,7 +28,9 @@ import powerRouter from './calculations/power.js';
 import jumpingpowerRouter from './calculations/jumping.js';
 import gripRouter from './calculations/grip.js';
 import nmeRouter from './calculations/neuromuscular-index.js'
-
+import flexibilityRouter from './calculations/flexibility.js';
+import sfiRouter from './calculations/sfi.js';
+import somatoRouter from './calculations/somatotypes.js';
 
 dotenv.config();
 
@@ -68,6 +70,9 @@ app.use('/speed', speedRouter);
 app.use('/power', powerRouter);
 app.use('/jumpingpower', jumpingpowerRouter);
 app.use('/grip', gripRouter);
-app.use('/nme', nmeRouter)
+app.use('/nme', nmeRouter);
+app.use('/flexibility', flexibilityRouter);
+app.use('/sfi', sfiRouter);
+app.use('/somato', somatoRouter);
 
 app.listen(PORT, ()=>console.log(`Server listening on ${PORT}`));
