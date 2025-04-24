@@ -27,6 +27,7 @@ import speedRouter from './calculations/speed.js';
 import powerRouter from './calculations/power.js';
 import jumpingpowerRouter from './calculations/jumping.js';
 import gripRouter from './calculations/grip.js';
+import nmeRouter from './calculations/neuromuscular-index.js'
 
 
 dotenv.config();
@@ -67,5 +68,6 @@ app.use('/speed', speedRouter);
 app.use('/power', powerRouter);
 app.use('/jumpingpower', jumpingpowerRouter);
 app.use('/grip', gripRouter);
+app.use('/nme', nmeRouter)
 
 app.listen(PORT, ()=>console.log(`Server listening on ${PORT}`));
