@@ -4,7 +4,7 @@ import pool from '../db.js';
 const router = express.Router();
 
 // GET /api/athlete/:athlete_id/nme
-router.get('/:athlete_id', /* authenticateToken, */ async (req, res) => {
+router.put('/:athlete_id', /* authenticateToken, */ async (req, res) => {
   try {
     const { athlete_id } = req.params;
 

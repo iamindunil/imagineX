@@ -2,7 +2,7 @@ import express from 'express';
 import pool from '../db.js';
 const router = express.Router();
 
-router.get('/:athlete_id', /*authenticateToken,*/ async (req, res) => {
+router.put('/:athlete_id', /*authenticateToken,*/ async (req, res) => {
     try {
         const { athlete_id } = req.params;
         const result = await pool.query('SELECT vertical_jump, weight FROM measurements INNER JOIN BasicPerformance ON measurements.athlete_id = BasicPerformance.athlete_id WHERE measurements.athlete_id = $1', [athlete_id]);
