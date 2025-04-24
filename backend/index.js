@@ -24,6 +24,10 @@ import bmiRouter from './calculations/bmi.js';
 import ptwRouter from './calculations/ptw.js';
 import vo2maxRouter from './calculations/vo2max.js';
 import speedRouter from './calculations/speed.js';
+import powerRouter from './calculations/power.js';
+import jumpingpowerRouter from './calculations/jumping.js';
+import gripRouter from './calculations/grip.js';
+
 
 dotenv.config();
 
@@ -60,5 +64,8 @@ app.use('/bmi', bmiRouter);
 app.use('/ptw', ptwRouter);
 app.use('/vo2max', vo2maxRouter);
 app.use('/speed', speedRouter);
+app.use('/power', powerRouter);
+app.use('/jumpingpower', jumpingpowerRouter);
+app.use('/grip', gripRouter);
 
 app.listen(PORT, ()=>console.log(`Server listening on ${PORT}`));
