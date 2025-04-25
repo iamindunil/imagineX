@@ -1,0 +1,176 @@
+/* Normal CSS for React Native Web */
+
+/* General styles */
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 3rem;
+}
+
+.welcome-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+}
+
+.icon {
+  width: 96px;
+  height: 96px;
+  background-color: #1d4ed8;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.icon-text {
+  color: white;
+  font-size: 2rem;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.subtitle {
+  text-align: center;
+  color: #4b5563;
+  margin-bottom: 2rem;
+}
+
+.image {
+  width: 100%;
+  height: 200px;
+  border-radius: 1rem;
+  object-fit: cover;
+  margin-bottom: 2rem;
+}
+
+.button, .secondary-button {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 1rem;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+}
+
+.button {
+  background-color: #1d4ed8;
+  color: white;
+}
+
+.button:hover {
+  background-color: #2563eb;
+}
+
+.secondary-button {
+  background-color: #f3f4f6;
+  color: #4b5563;
+  font-weight: 500;
+}
+
+.secondary-button:hover {
+  background-color: #e5e7eb;
+}
+
+.header {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.input-field {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 1rem;
+  border: 1px solid #d1d5db;
+  margin-bottom: 1rem;
+}
+
+.gender-selection {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.gender-button {
+  flex: 1;
+  padding: 1rem;
+  border-radius: 1rem;
+  border: 1px solid #d1d5db;
+  text-align: center;
+}
+
+.gender-button.selected {
+  background-color: #1d4ed8;
+  color: white;
+}
+
+.results-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+}
+
+.badge {
+  background-color: #e0f2fe;
+  color: #0284c7;
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+}
+
+.results-header {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.results-subheader {
+  color: #4b5563;
+  margin-bottom: 2rem;
+}
+
+.result-image {
+  width: 50%;
+  border-radius: 1rem;
+}
+
+.recommendation-card {
+  background-color: #eff6ff;
+  padding: 1.25rem;
+  border-radius: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.recommendation-title {
+  font-weight: 600;
+  font-size: 1.125rem;
+}
+
+.recommendation-description {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.button-container {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.button-container .button {
+  flex: 1;
+}

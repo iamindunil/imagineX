@@ -1,74 +1,158 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, Image, ScrollView } from 'react-native';
+import '../styles/home-styles.css';  // Import normal CSS
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+const App: React.FC = () => {
+  const [currentStep, setCurrentStep] = useState<number>(0);
+  const [personalData, setPersonalData] = useState({
+    age: '',
+    gender: '',
+    height: '',
+    weight: '',
+  });
 
-export default function HomeScreen() {
-  return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
+  const handlePersonalDataChange = (name: string, value: string) => {
+    setPersonalData(prev => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleGenderSelect = (gender: string) => {
+    setPersonalData(prev => ({
+      ...prev,
+      gender,
+    }));
+  };
+
+  const handleNextStep = () => {
+    setCurrentStep(prev => prev + 1);
+  };
+
+  const handlePrevStep = () => {
+    setCurrentStep(prev => prev - 1);
+  };
+
+  // Welcome Screen
+  const WelcomeScreen = () => (
+    <View className="welcome-screen">
+      <View className="container">
+        <View className="icon">
+          <Text className="icon-text">🏃‍♂️</Text>
+        </View>
+        <Text className="title">Sport Match AI</Text>
+        <Text className="subtitle">Discover your perfect sport match based on your body type and preferences</Text>
         <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
+          source={{
+            uri: 'https://readdy.ai/api/search-image?query=3D%20illustration%20of%20diverse%20athletic%20body%20types%20in%20dynamic%20poses',
+          }}
+          className="image"
         />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12'
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+      </View>
+      <TouchableOpacity onPress={handleNextStep} className="button">
+        <Text className="button-text">Get Started</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => {}} className="secondary-button">
+        <Text className="secondary-button-text">View Previous Results</Text>
+      </TouchableOpacity>
+    </View>
   );
-}
 
-const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
-  },
-});
+  // Personal Information Screen
+  const PersonalInfoScreen = () => (
+    <ScrollView className="personal-info-screen">
+      <View className="progress-bar">
+        <View className="progress-bar-filled" style={{ width: '33%' }} />
+      </View>
+      <Text className="header">Personal Information</Text>
+      <TextInput
+        value={personalData.age}
+        onChangeText={text => handlePersonalDataChange('age', text)}
+        className="input-field"
+        placeholder="Enter your age"
+        keyboardType="numeric"
+      />
+      <View className="gender-selection">
+        <TouchableOpacity
+          onPress={() => handleGenderSelect('male')}
+          className={`gender-button ${personalData.gender === 'male' ? 'selected' : ''}`}
+        >
+          <Text className="gender-text">Male</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => handleGenderSelect('female')}
+          className={`gender-button ${personalData.gender === 'female' ? 'selected' : ''}`}
+        >
+          <Text className="gender-text">Female</Text>
+        </TouchableOpacity>
+      </View>
+      <TextInput
+        value={personalData.height}
+        onChangeText={text => handlePersonalDataChange('height', text)}
+        className="input-field"
+        placeholder="Enter your height"
+        keyboardType="numeric"
+      />
+      <TextInput
+        value={personalData.weight}
+        onChangeText={text => handlePersonalDataChange('weight', text)}
+        className="input-field"
+        placeholder="Enter your weight"
+        keyboardType="numeric"
+      />
+      <View className="button-container">
+        <TouchableOpacity onPress={handlePrevStep} className="secondary-button">
+          <Text className="secondary-button-text">Back</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={handleNextStep} className="button">
+          <Text className="button-text">Next</Text>
+        </TouchableOpacity>
+      </View>
+    </ScrollView>
+  );
+
+  // Results Screen
+  const ResultsScreen = () => (
+    <View className="results-screen">
+      <Text className="badge">Your Somatotype</Text>
+      <Text className="results-header">Mesomorph</Text>
+      <Text className="results-subheader">Athletic build with well-defined muscles</Text>
+      <Image
+        source={{
+          uri: 'https://readdy.ai/api/search-image?query=3D%20illustration%20of%20mesomorph%20body%20type%2C%20athletic%20male%20figure%20with%20well-defined%20muscles',
+        }}
+        className="result-image"
+      />
+      <View className="recommendation-card">
+        <Text className="recommendation-title">Recommended Sport Category</Text>
+        <Text className="recommendation-description">Strength & Power Sports</Text>
+      </View>
+      <View className="button-container">
+        <TouchableOpacity onPress={() => setCurrentStep(0)} className="button">
+          <Text className="button-text">Try Another Analysis</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+
+  const renderStep = () => {
+    switch (currentStep) {
+      case 0:
+        return <WelcomeScreen />;
+      case 1:
+        return <PersonalInfoScreen />;
+      case 2:
+        return <ResultsScreen />;
+      default:
+        return <WelcomeScreen />;
+    }
+  };
+
+  return (
+    <View className="container">
+      {renderStep()}
+    </View>
+  );
+};
+
+export default App;

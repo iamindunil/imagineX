@@ -91,6 +91,7 @@ router.put('/:athlete_id', /* authenticateToken, */ async (req, res) => {
              nme_arm    = $2,
              nme_sprint = $3,
              neuromuscular_efficiency = $4
+
          WHERE athlete_id = $5`,
         [nme_leg, nme_arm, nme_sprint, neuromuscular_efficiency, athlete_id]
       );
