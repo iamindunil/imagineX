@@ -7,6 +7,7 @@ const router = express.Router();
 //Get all athletes
 router.get('/', /*authenticateToken,*/ async (req, res) => {
     try {
+        console.debug('Getting all athletes');
         const result = await pool.query('SELECT * FROM athlete');
         const athletes = result.rows.map((athlete) => {
             if (athlete.dob instanceof Date) {
