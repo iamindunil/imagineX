@@ -15,8 +15,8 @@ router.put('/:athlete_id', /* authenticateToken, */ async (req, res) => {
          m.cc,
          m.skinfold_triceps,
          m.skinfold_medial_calf,
-         m.vertical_jump,
-         m.grip_strength,
+         bp.vertical_jump,
+         bp.grip_strength,
          bp.time_30m,
          m.weight
        FROM measurements m
@@ -76,7 +76,7 @@ router.put('/:athlete_id', /* authenticateToken, */ async (req, res) => {
     const nme_sprint = speed30   / calfCSA;   // m/s per cm²
 
     // 6) simple composite (average)
-    const nme_overall = (nme_leg + nme_arm + nme_sprint) / 3;
+    const neuromuscular_efficiency = (nme_leg + nme_arm + nme_sprint) / 3;
 
     // 7) upsert into AthleteStats
     const { rows: statsRows } = await pool.query(
@@ -90,31 +90,31 @@ router.put('/:athlete_id', /* authenticateToken, */ async (req, res) => {
          SET nme_leg    = $1,
              nme_arm    = $2,
              nme_sprint = $3,
-             nme_overall= $4
+             neuromuscular_efficiency = $4
          WHERE athlete_id = $5`,
-        [nme_leg, nme_arm, nme_sprint, nme_overall, athlete_id]
+        [nme_leg, nme_arm, nme_sprint, neuromuscular_efficiency, athlete_id]
       );
       return res.json({
         athlete_id,
         nme_leg,
         nme_arm,
         nme_sprint,
-        nme_overall,
+        neuromuscular_efficiency,
         message: 'NME updated successfully'
       });
     } else {
       await pool.query(
         `INSERT INTO AthleteStats
-         (athlete_id, nme_leg, nme_arm, nme_sprint, nme_overall)
+         (athlete_id, nme_leg, nme_arm, nme_sprint, neuromuscular_efficiency)
          VALUES ($1, $2, $3, $4, $5)`,
-        [athlete_id, nme_leg, nme_arm, nme_sprint, nme_overall]
+        [athlete_id, nme_leg, nme_arm, nme_sprint, neuromuscular_efficiency]
       );
       return res.json({
         athlete_id,
         nme_leg,
         nme_arm,
         nme_sprint,
-        nme_overall,
+        neuromuscular_efficiency,
         message: 'NME added successfully'
       });
     }
